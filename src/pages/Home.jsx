@@ -4,33 +4,51 @@ import axios from "axios";
 
 export default function Home() {
   const navigate = useNavigate();
-  const [games, setGames] = useState({});
+  const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/login")
+      navigate("/login");
+      return;
     }
     
     async function fetchGames() {
       setLoading(true);
-      const response = await axios.post("http://localhost:3000/api/v1/games/getall", {
-        token: token
-      });
-
-      setGames(response.data);
-      setLoading(false);
+      try {
+        const response = await axios.post("http://localhost:3000/api/v1/games/getall", { token });
+        setGames(response.data);
+      } catch (error) {
+        console.error("Error fetching games:", error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchGames();
-  }, []);
+  }, [navigate]);
 
-  if (loading) {
-    return <div>Loading...</div>
+  const handleSearchChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const filteredGames = games.filter((game) => 
+    game.title.toLowerCase().includes(name.toLowerCase())
+  );
+
+  function getCode(id) {
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    const base = alphabet.length;
+    let firstLetterIndex = Math.floor(id / base);
+    let secondLetterIndex = id % base;
+
+    let firstLetter = alphabet[firstLetterIndex];
+    let secondLetter = alphabet[secondLetterIndex];
+
+    return firstLetter + secondLetter;
   }
-
-  console.log(games);
 
   return (
     <div>
@@ -41,13 +59,21 @@ export default function Home() {
           navigate("/login");
         }}>Logout</button>
       </div>
-      <div>
-        {
-          games.map((game) => (
-            <div key={game.id}>{game.title}</div>
-          ))
-        }
-      </div>
+      Recherche : <input
+        type="text"
+        value={name}
+        onChange={handleSearchChange}
+      />
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        filteredGames.map((game) => (
+          <div key={game.id}>
+            <img src={`https://www.myludo.fr/img/jeux/1/300/${getCode(Math.floor(game.id / 1000))}/${game.id}.png`} />
+            {game.title}
+          </div>
+        ))
+      )}
     </div>
-  )
+  );
 }

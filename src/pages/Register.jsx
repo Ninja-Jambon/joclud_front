@@ -6,7 +6,6 @@ export default function Register() {
     const navigate = useNavigate();
 
     useEffect(() => {
-  
       if (localStorage.getItem("token")) {
         navigate("/")
       }
@@ -14,8 +13,8 @@ export default function Register() {
   
     async function register() {
       const username = document.getElementById("username").value;
-    const name = document.getElementById("name").value;
-    const lastname = document.getElementById("lastname").value;
+      const name = document.getElementById("name").value;
+      const lastname = document.getElementById("lastname").value;
       const password = document.getElementById("password").value;
   
       if (!username || !name || !lastname || !password) {
