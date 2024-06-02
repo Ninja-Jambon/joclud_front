@@ -117,7 +117,7 @@ export default function Home() {
                 <div className='game-bottom'>
                   <div className='helpers'>
                     {JSON.parse(game.helpers).length === 0 ? (
-                      <p className='no-helper'>Aucun membre ne connait les rêgles</p>
+                      <p className='no-helper'>Personne</p>
                     ) :
                     (JSON.parse(game.helpers).map((helper) => (
                       helper === user.username ? () => { } : (

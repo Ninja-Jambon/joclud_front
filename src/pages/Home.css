@@ -104,3 +104,24 @@ body {
 .helpButton-disabled {
     background-color: #d45555;
 }
+
+@media only screen and (max-width: 664px) {
+    .game {
+        padding: 15px;
+        border-radius: 45px;
+    }
+
+    .game-image {
+        height: 150px;
+        margin-left: 20px;
+    }
+
+    .game-right {
+        width: 55vw;
+        margin-right: 5vw;
+    }
+
+    .game-title {
+        font-size: 20px;
+    }
+}
