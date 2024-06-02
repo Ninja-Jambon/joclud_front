@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
-
-import './HelpButton.css';
 
 export default function HelpButton({ gameid, helpingprop, token }) {
     const [helping, setHelping] = useState(helpingprop);
+    console.log("helpingprop:", helpingprop)
 
     function addHelper() {
         axios.post("http://leizour.fr:3000/api/v1/games/addHelper", { token, gameid })
@@ -19,6 +19,7 @@ export default function HelpButton({ gameid, helpingprop, token }) {
     }
 
     function handleClick(event) {
+        console.log("helping:", helping)
         if (helping) {
             removeHelper();
         } else {
@@ -37,6 +38,6 @@ export default function HelpButton({ gameid, helpingprop, token }) {
     }, [helping]);
 
     return (
-        <button className="helpButton" id={`helpbutton-${gameid}`} onClick={handleClick}>Set helper</button>
+        <button className="helpButton" id={`helpbutton-${gameid}`} onClick={handleClick}>{helping ? <FontAwesomeIcon icon="fa-solid fa-book-bookmark" /> : <FontAwesomeIcon icon="fa-solid fa-book" />}</button>
     )
 }

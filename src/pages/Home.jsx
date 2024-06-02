@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from "axios";
+
+import './Home.css';
 
 import HelpButton from '../assets/HelpButton';
 
@@ -10,6 +13,7 @@ export default function Home() {
   const [token, setToken] = useState();
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [userloading, setUserLoading] = useState(true);
   const [name, setName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -22,6 +26,7 @@ export default function Home() {
 
     setToken(tokenLocal);
     setUser(JSON.parse(atob(tokenLocal.split(".")[1])).user);
+    setUserLoading(false);
 
     async function fetchGames() {
       setLoading(true);
@@ -72,53 +77,73 @@ export default function Home() {
 
   return (
     <div>
-      <div>
-        <h1>Home</h1>
+      <h1 className='page-title'>Base de données des jeux Joclud</h1>
+      <div className='home'>
+        <h2 className='welcome'>Bienvenue, {userloading ? "..." : user.name} !</h2>
         <button onClick={() => {
           localStorage.removeItem("token");
           navigate("/login");
-        }}>Logout</button>
+        }} className='logout-button'>
+          Me déconnecter
+        </button>
       </div>
-      Recherche : <input
-        type="text"
-        value={name}
-        onChange={handleSearchChange}
-      />
+      <div className='search'>
+        <input type="text" value={name} onChange={handleSearchChange} className='search-input' placeholder='Chercher un jeu'/>
+      </div>
       <div className="pagination">
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-          Previous
+        <button onClick={() => handlePageChange(1)} disabled={currentPage === 1} className="pagination-button">
+          <FontAwesomeIcon icon="fa-solid fa-angles-left" />
         </button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          Next
+        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="pagination-button">
+          <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+        </button>
+        <span className='pagination-text'>Page {currentPage} sur {totalPages}</span>
+        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="pagination-button">
+          <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+        </button>
+        <button onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages} className="pagination-button">
+          <FontAwesomeIcon icon="fa-solid fa-angles-right" />
         </button>
       </div>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        currentGames.map((game) => (
-          <div className='game'>
-            <img src={`https://www.myludo.fr/img/jeux/1/300/${getCode(Math.floor(game.id / 1000))}/${game.id}.png`} />
-            <h1 className='game-title'>{game.title}</h1>
-            <div className='helpers'>
-              {(JSON.parse(game.helpers).map((helper) => (
-                helper === user.username ? () => { } : (
-                  <div className='helper'>
-                    <h2 className='helper-title'>{helper}</h2>
+      <div className='games'>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          currentGames.map((game) => (
+            <div className='game'>
+              <img src={`https://www.myludo.fr/img/jeux/1/300/${getCode(Math.floor(game.id / 1000))}/${game.id}.png`} className='game-image'/>
+              <div className='game-right'>
+                <h1 className='game-title'>{game.title}</h1>
+                <div className='game-bottom'>
+                  <div className='helpers'>
+                    {JSON.parse(game.helpers).length === 0 ? (
+                      <p className='no-helper'>Aucun membre ne connait les rêgles</p>
+                    ) :
+                    (JSON.parse(game.helpers).map((helper) => (
+                      helper === user.username ? () => { } : (
+                        <p className='helper'>{helper}</p>
+                      ))))}
                   </div>
-                ))))}
+                  <HelpButton gameid={game.id} helpingprop={JSON.parse(game.helpers).includes(user.username)} token={token} />
+                </div>
+              </div>
             </div>
-            <HelpButton gameid={game.id} helpingprop={JSON.parse(game.helpers).includes(user.id)} token={token} />
-          </div>
-        ))
-      )}
+          ))
+        )}
+      </div>
       <div className="pagination">
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-          Previous
+        <button onClick={() => handlePageChange(1)} disabled={currentPage === 1} className="pagination-button">
+          <FontAwesomeIcon icon="fa-solid fa-angles-left" />
         </button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          Next
+        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="pagination-button">
+          <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+        </button>
+        <span className='pagination-text'>Page {currentPage} sur {totalPages}</span>
+        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="pagination-button">
+          <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+        </button>
+        <button onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages} className="pagination-button">
+          <FontAwesomeIcon icon="fa-solid fa-angles-right" />
         </button>
       </div>
     </div>

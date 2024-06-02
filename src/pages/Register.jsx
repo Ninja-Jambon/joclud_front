@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 
+import './Register.css';
+
 export default function Register() {
     const navigate = useNavigate();
 
@@ -43,26 +45,16 @@ export default function Register() {
     }
 
     return (
-        <div>
-          <h1>Create an account</h1>
+        <div className='register'>
+          <h1>Création de compte</h1>
+            <input type="text" id="username" placeholder="Nom d'utilisateur" className='input'/>
+            <input type="text" id="name" placeholder='Prénom' className='input'/>
+            <input type="text" id="lastname" placeholder='Nom de famille' className='input'/>
+            <input type="password" id="password" placeholder='Mot de passe' className='input'/>
           <div>
-            <div>
-              Usename : <input type="text" id="username"/>
-            </div>
-            <div>
-              Name : <input type="text" id="name"/>
-            </div>
-            <div>
-              Last name : <input type="text" id="lastname"/>
-            </div>
-            <div>
-              Password : <input type="password" id="password"/>
-            </div>
-            <div>
-              <button onClick={register}>Create an account</button>
-            </div>
+            <button onClick={register} className='button'>Créer un compte</button>
           </div>
-          <Link to="/login">Login with my account</Link>
+          <Link to="/login">Me connecter avec mon compte</Link>
         </div>
     )
 }

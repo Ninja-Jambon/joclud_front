@@ -1,0 +1,106 @@
+body {
+    text-align: center;
+    background-color: #66c6d6;
+    font-family: sans-serif;
+}
+
+.page-title {
+    font-size: 50px;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.logout-button {
+    padding: 7px 10px;
+    border-radius: 15px;
+    border: none;
+    background-color: #d45555;
+}
+
+.search {
+    margin: 20px;
+}
+
+.search-input {
+    padding: 7px 10px;
+    border-radius: 15px;
+    border: none;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px;
+}
+
+.pagination-button {
+    padding: 7px 10px;
+    border-radius: 15px;
+    border: none;
+}
+
+.games {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    gap: 20px;
+}
+
+.game {
+    padding: 30px;
+    background-color: white;
+    display: flex;
+    border-radius: 60px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    justify-content: space-between;
+}
+
+.game-image {
+    height: 250px;
+    margin-left: 20px;
+}
+
+.game-right {
+    width: 55vw;
+    margin-right: 15vw;
+}
+
+.game-bottom {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 15px;
+}
+
+.helper {
+    background-color: #b4d666;
+    padding: 7px 10px;
+    border-radius: 15px;
+}
+
+.no-helper {
+    background-color: #d66666;
+    padding: 7px 10px;
+    border-radius: 15px;
+}
+
+.helpButton {
+    padding: 7px 10px;
+    border-radius: 15px;
+    border: none;
+}
+
+.helpButton-enabled {
+    background-color: #8caf39;
+}
+
+.helpButton-disabled {
+    background-color: #d45555;
+}

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 
+import './Login.css';
+
 export default function Login() {
   const navigate = useNavigate();
 
@@ -35,20 +37,12 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <div>
-        <div>
-          Usename : <input type="text" id="username"/>
-        </div>
-        <div>
-          Password : <input type="password" id="password"/>
-        </div>
-        <div>
-          <button onClick={login}>Login</button>
-        </div>
-      </div>
-      <Link to="/register">Create an account</Link>
+    <div className='login'>
+      <h1>Connexion</h1>
+      <input type="text" id="username" className='input' placeholder="Nom d'utilisateur"/>
+      <input type="password" id="password" className='input' placeholder='Mot de passe'/>
+      <button onClick={login} className='button'>Me connecter</button>
+      <Link to="/register">Créer un compte</Link>
     </div>
   )
 }
