@@ -2,23 +2,30 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import HelpButton from '../assets/HelpButton';
+
 export default function Home() {
   const navigate = useNavigate();
+  const [user, setUser] = useState();
+  const [token, setToken] = useState();
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    const tokenLocal = localStorage.getItem("token");
+    if (!tokenLocal) {
       navigate("/login");
       return;
     }
+
+    setToken(tokenLocal);
+    setUser(JSON.parse(atob(tokenLocal.split(".")[1])).user);
     
     async function fetchGames() {
       setLoading(true);
       try {
-        const response = await axios.post("http://localhost:3000/api/v1/games/getall", { token });
+        const response = await axios.post("http://leizour.fr:3000/api/v1/games/getall", { token: tokenLocal });
         setGames(response.data);
       } catch (error) {
         console.error("Error fetching games:", error);
@@ -28,9 +35,9 @@ export default function Home() {
     }
 
     fetchGames();
-  }, [navigate]);
+  }, []);
 
-  const handleSearchChange = (event) => {
+  function handleSearchChange(event) {
     setName(event.target.value);
   };
 
@@ -68,9 +75,18 @@ export default function Home() {
         <div>Loading...</div>
       ) : (
         filteredGames.map((game) => (
-          <div key={game.id}>
+          <div className='game'>
             <img src={`https://www.myludo.fr/img/jeux/1/300/${getCode(Math.floor(game.id / 1000))}/${game.id}.png`} />
-            {game.title}
+            <h1 className='game-title'>{game.title}</h1>
+            <div className='helpers'>
+              {(JSON.parse(game.helpers).map((helper) => (
+                helper === user.id ? () => {} : (
+                  <div className='helper'>
+                    <h2 className='helper-title'>{helper}</h2>
+                  </div>
+              ))))}
+            </div>
+            <HelpButton gameid={game.id} helpingprop={JSON.parse(game.helpers).includes(user.id)} token={token} />
           </div>
         ))
       )}

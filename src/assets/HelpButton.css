@@ -1,0 +1,7 @@
+.helpButton-enabled {
+    background-color: green;
+}
+
+.helpButton-disabled {
+    background-color: red;
+}
