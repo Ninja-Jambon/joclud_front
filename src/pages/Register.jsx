@@ -24,14 +24,14 @@ export default function Register() {
       }
   
       try {
-        const response = await axios.post("http://leizour.fr:3000/api/v1/auth/register", {
+        const response = await axios.post("https://leizour.fr:3000/api/v1/auth/register", {
             username: username,
             name: name,
             lastname: lastname,
             password: password
         })
 
-        const loginResponse = await axios.post("http://leizour.fr:3000/api/v1/auth/login", {
+        const loginResponse = await axios.post("https://leizour.fr:3000/api/v1/auth/login", {
             username: username,
             password: password
         })

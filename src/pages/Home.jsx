@@ -31,7 +31,7 @@ export default function Home() {
     async function fetchGames() {
       setLoading(true);
       try {
-        const response = await axios.post("http://leizour.fr:3000/api/v1/games/getall", { token: tokenLocal });
+        const response = await axios.post("https://leizour.fr:3000/api/v1/games/getall", { token: tokenLocal });
         setGames(response.data);
       } catch (error) {
         console.error("Error fetching games:", error);
