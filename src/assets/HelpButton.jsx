@@ -4,7 +4,6 @@ import axios from 'axios';
 
 export default function HelpButton({ gameid, helpingprop, token }) {
     const [helping, setHelping] = useState(helpingprop);
-    console.log("helpingprop:", helpingprop)
 
     function addHelper() {
         axios.post("https://leizour.fr/api/v1/games/addHelper", { token, gameid })
