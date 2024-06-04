@@ -7,13 +7,13 @@ export default function HelpButton({ gameid, helpingprop, token }) {
     console.log("helpingprop:", helpingprop)
 
     function addHelper() {
-        axios.post("http://leizour.fr:3000/api/v1/games/addHelper", { token, gameid })
+        axios.post("https://leizour.fr/api/v1/games/addHelper", { token, gameid })
             .then(() => setHelping(true))
             .catch((error) => console.error("Error adding helper"));
     }
 
     function removeHelper() {
-        axios.post("http://leizour.fr:3000/api/v1/games/removeHelper", { token, gameid })
+        axios.post("https://leizour.fr/api/v1/games/removeHelper", { token, gameid })
             .then(() => setHelping(false))
             .catch((error) => console.error("Error removing helper"));
     }
@@ -26,6 +26,10 @@ export default function HelpButton({ gameid, helpingprop, token }) {
             addHelper();
         }
     }
+
+    useEffect(() => {
+        setHelping(helpingprop);
+    }, [helpingprop]);
 
     useEffect(() => {
         if (helping) {

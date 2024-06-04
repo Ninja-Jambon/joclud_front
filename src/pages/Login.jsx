@@ -23,7 +23,7 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("https://leizour.fr:3000/api/v1/auth/login", {
+      const response = await axios.post("https://leizour.fr/api/v1/auth/login", {
         username: username,
         password: password
       })
