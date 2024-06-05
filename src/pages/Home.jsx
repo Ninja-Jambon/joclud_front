@@ -48,6 +48,7 @@ export default function Home() {
 
 	function handleSearchChange(event) {
 		setName(event.target.value);
+		setCurrentPage(1);
 	};
 
 	const filteredGames = games.filter((game) =>
@@ -62,6 +63,10 @@ export default function Home() {
 			setCurrentPage(newPage);
 			window.scrollTo(0, 0);
 		}
+	}
+
+	function resetSearch() {
+		setName("");
 	}
 
 	const currentGames = filteredGames.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -84,6 +89,7 @@ export default function Home() {
 			</div>
 			<div className='search'>
 				<input type="text" value={name} onChange={handleSearchChange} className='search-input' placeholder='Chercher un jeu' />
+				<button className='button' onClick={resetSearch}><FontAwesomeIcon icon="fa-solid fa-xmark" /></button>
 			</div>
 			<div className="pagination">
 				<button onClick={() => handlePageChange(1)} disabled={currentPage === 1} className="pagination-button">

@@ -24,6 +24,10 @@ body {
 
 .search {
     margin: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-input {
@@ -70,6 +74,9 @@ body {
 }
 
 .game-right {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     width: 55vw;
     margin-right: 10vw;
 }
@@ -79,6 +86,41 @@ body {
     justify-content: center;
     display: flex;
     gap: 15px;
+}
+
+.tags {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.tag {
+    background-color: #b4d666;
+    padding: 7px 10px;
+    border-radius: 15px;
+    margin: 0;
+}
+
+.basegame {
+    background-color: #66d6bf;
+}
+
+.extension {
+    background-color: #e99731;
+}
+
+.players {
+    background-color: #fae294;
+}
+
+.duration {
+    background-color: #c892c4;
+}
+
+.ages {
+    background-color: #92c8b5;
 }
 
 .helpers {
@@ -137,6 +179,10 @@ body {
 
     .game-title {
         font-size: 17px;
+    }
+
+    .tags{
+        flex-direction: column;
     }
 
     .helpers {
