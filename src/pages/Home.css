@@ -63,13 +63,15 @@ body {
 }
 
 .game-image {
-    height: 250px;
+    width: 250px;
     margin-left: 20px;
+    margin-right: 5px;
+    object-fit: contain;
 }
 
 .game-right {
     width: 55vw;
-    margin-right: 15vw;
+    margin-right: 10vw;
 }
 
 .game-bottom {
@@ -79,16 +81,25 @@ body {
     gap: 15px;
 }
 
+.helpers {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 5px;
+}
+
 .helper {
     background-color: #b4d666;
     padding: 7px 10px;
     border-radius: 15px;
+    margin: 0;
 }
 
 .no-helper {
     background-color: #d66666;
     padding: 7px 10px;
     border-radius: 15px;
+    margin: 0;
 }
 
 .helpButton {
@@ -106,22 +117,29 @@ body {
 }
 
 @media only screen and (max-width: 664px) {
+    .games {
+        margin: 10px;
+    }
+
     .game {
-        padding: 15px;
-        border-radius: 45px;
+        padding: 10px;
+        border-radius: 35px;
     }
 
     .game-image {
-        height: 150px;
-        margin-left: 20px;
+        width: 75px;
     }
 
     .game-right {
         width: 55vw;
-        margin-right: 5vw;
+        margin-right: 10vw;
     }
 
     .game-title {
-        font-size: 20px;
+        font-size: 17px;
+    }
+
+    .helpers {
+        flex-direction: column;
     }
 }
