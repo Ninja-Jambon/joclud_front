@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
 
-export default function HelpButton({ gameid, helpingprop, token }) {
-    const [helping, setHelping] = useState(helpingprop);
+export default function HelpButton({ gameid, token, user }) {
+    const [helping, setHelping] = useState();
 
     function addHelper() {
         axios.post("https://leizour.fr/api/v1/games/addHelper", { token, gameid })
@@ -18,7 +18,6 @@ export default function HelpButton({ gameid, helpingprop, token }) {
     }
 
     function handleClick(event) {
-        console.log("helping:", helping)
         if (helping) {
             removeHelper();
         } else {
@@ -27,8 +26,14 @@ export default function HelpButton({ gameid, helpingprop, token }) {
     }
 
     useEffect(() => {
-        setHelping(helpingprop);
-    }, [helpingprop]);
+        async function fetchGame() {
+            const response = await axios.post("https://leizour.fr/api/v1/games/getGame", { token, gameid })
+                .catch((error) => console.error("Error getting game"));
+            setHelping(JSON.parse(response.data.helpers).includes(user.username));
+        }
+
+        fetchGame();
+    }, [gameid]);
 
     useEffect(() => {
         if (helping) {

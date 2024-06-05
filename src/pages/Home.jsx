@@ -124,7 +124,7 @@ export default function Home() {
                         <p className='helper'>{helper}</p>
                       ))))}
                   </div>
-                  <HelpButton gameid={game.id} helpingprop={JSON.parse(game.helpers).includes(user.username)} token={token} />
+                  <HelpButton gameid={game.id} helpingprop={JSON.parse(game.helpers).includes(user.username)} user={user} token={token} />
                 </div>
               </div>
             </div>
