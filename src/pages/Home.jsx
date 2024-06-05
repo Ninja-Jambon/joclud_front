@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from "axios";
@@ -13,7 +13,7 @@ export default function Home() {
 	const [token, setToken] = useState();
 	const [games, setGames] = useState([]);
 	const [userloading, setUserLoading] = useState(true);
-	const [gameLoading, setGameLoading] = useState(true);
+	const [gamesLoading, setGamesLoading] = useState(true);
 	const [name, setName] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -38,7 +38,7 @@ export default function Home() {
 			} catch (error) {
 				console.error("Error fetching games:", error);
 			} finally {
-				setGameLoading(false);
+				setGamesLoading(false);
 			}
 		}
 
@@ -106,7 +106,7 @@ export default function Home() {
 					<FontAwesomeIcon icon="fa-solid fa-angles-right" />
 				</button>
 			</div>
-			{gameLoading ? <p>Loading...</p> :
+			{gamesLoading ? <p>Loading...</p> :
 				<div className='games'>
 					{currentGames.map((game) => {
 						return <Game key={game.id} game={game} token={token} user={user} />
