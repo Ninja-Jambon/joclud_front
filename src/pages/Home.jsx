@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from "axios";
@@ -22,6 +22,12 @@ export default function Home() {
 
 		function checkToken() {
 			if (!tokenLocal) {
+				navigate("/login");
+				return;
+			}
+
+			if (JSON.parse(atob(tokenLocal.split(".")[1])).expiration < Date.now()) {
+				localStorage.removeItem("token");
 				navigate("/login");
 				return;
 			}
@@ -80,6 +86,7 @@ export default function Home() {
 			<h1 className='page-title'>Base de données des jeux Joclud</h1>
 			<div className='home'>
 				<h2 className='welcome'>Bienvenue, {user.name} !</h2>
+				{user.admin ? <button onClick={() => navigate("/admin")} className='button admin-button'>Admin</button> : null}
 				<button onClick={() => {
 					localStorage.removeItem("token");
 					navigate("/login");

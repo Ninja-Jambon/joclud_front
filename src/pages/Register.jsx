@@ -30,14 +30,7 @@ export default function Register() {
             lastname: lastname,
             password: password
         })
-
-        const loginResponse = await axios.post("https://leizour.fr/api/v1/auth/login", {
-            username: username,
-            password: password
-        })
-  
-        localStorage.setItem("token", loginResponse.data.token);
-        navigate("/");
+        navigate("/login");
       } catch (error) {
         alert("Username already exists");
         return;

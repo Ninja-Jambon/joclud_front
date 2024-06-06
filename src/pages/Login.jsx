@@ -22,18 +22,17 @@ export default function Login() {
       return;
     }
 
-    try {
-      const response = await axios.post("https://leizour.fr/api/v1/auth/login", {
-        username: username,
-        password: password
-      })
+    const response = await axios.post("https://leizour.fr/api/v1/auth/login", { username: username, password: password})
+      .catch((error) => {
+        if (error.response.data.error == "you need to be verified to login") {
+          alert("Vous devez être vérifié pour vous connecter, veuillez attendre qu'un administrateur vérifie votre compte.");
+        } else {
+          alert("Nom d'utilisateur ou mot de passe incorrect.");
+        }
+      });
 
-      localStorage.setItem("token", response.data.token);
-      navigate("/");
-    } catch (error) {
-      alert("Invalid username or password");
-      return;
-    }
+    localStorage.setItem("token", response.data.token);
+    navigate("/");
   }
 
   return (
