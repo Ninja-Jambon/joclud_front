@@ -31,7 +31,11 @@ export default function UserVerfication({token}) {
     }
 
     else if (users.length === 0) {
-        return <div className='no-users'>Aucun utilisateur à vérifier</div>
+        return (
+            <div className='users'>
+                <div className='no-users'>Aucun utilisateur à vérifier</div>
+            </div>
+        )
     }
 
     else {
@@ -40,11 +44,10 @@ export default function UserVerfication({token}) {
                 {users.map((user) => {
                     return (
                         <div className='user' key={user.id}>
-                            <p>{user.username}</p>
-                            <p>{user.name}</p>
-                            <p>{user.lastname}</p>
-                            <p>{user.id}</p>
-                            <button className='verify-button' onClick={() => {verifyUser(user.username)}}>Vérifier</button>
+                            <p className='user-info'>Nom d'utilisateur : {user.username}</p>
+                            <p className='user-info'>Prénom : {user.name}</p>
+                            <p className='user-info'>Nom : {user.lastname}</p>
+                            <button className='button' onClick={() => {verifyUser(user.username)}}>Vérifier</button>
                         </div>
                     )
                 })}

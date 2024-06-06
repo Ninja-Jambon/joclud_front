@@ -53,6 +53,7 @@ body {
 .games {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 
@@ -60,10 +61,10 @@ body {
     padding: 30px;
     background-color: white;
     display: flex;
-    align-items: start;
     border-radius: 60px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
     justify-content: space-between;
+    width: 900px;
 }
 
 .game-image {
@@ -77,8 +78,12 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 55vw;
-    margin-right: 10vw;
+    width: 100%;
+    margin: 15px;
+}
+
+.game-title {
+    margin: 0;
 }
 
 .game-bottom {
@@ -160,10 +165,11 @@ body {
 
 @media only screen and (max-width: 664px) {
     .games {
-        margin: 10px;
+        margin: 15px;
     }
 
     .game {
+        width: 100%;
         padding: 10px;
         border-radius: 35px;
     }
@@ -172,20 +178,27 @@ body {
         width: 75px;
     }
 
-    .game-right {
-        width: 55vw;
-        margin-right: 10vw;
-    }
-
     .game-title {
         font-size: 17px;
     }
 
     .tags{
-        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        font-size: 13px;
     }
 
     .helpers {
-        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .helper {
+        font-size: 13px;
+    }
+
+    .no-helper {
+        font-size: 13px;
     }
 }

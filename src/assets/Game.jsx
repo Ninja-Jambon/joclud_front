@@ -21,8 +21,8 @@ export default function Game({game, token, user}) {
                 <h1 className='game-title'>{game.title}{game.subtitle ? `, ${game.subtitle}` : null}</h1>
                 <div className="tags">
                     {game.type == "extension" ? <div className="tag extension"><FontAwesomeIcon icon="fa-solid fa-plus" />  Extension</div> : <div className="tag basegame"><FontAwesomeIcon icon="fa-solid fa-puzzle-piece" /> Jeu de base</div>}
-                    <div className="tag players"><FontAwesomeIcon icon="fa-solid fa-user-group" /> {game.players}</div>
                     <div className="tag duration"><FontAwesomeIcon icon="fa-regular fa-clock" /> {game.duration}</div>
+                    <div className="tag players"><FontAwesomeIcon icon="fa-solid fa-user-group" /> {game.players}</div>
                     <div className="tag ages"><FontAwesomeIcon icon="fa-solid fa-child" /> {game.ages}</div>
                 </div>
                 <div className='game-bottom'>

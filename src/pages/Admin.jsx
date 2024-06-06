@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from "axios";
 
+import './Admin.css';
+
 import UserVerfication from '../assets/UserVerfication';
 
 export default function Admin() {
