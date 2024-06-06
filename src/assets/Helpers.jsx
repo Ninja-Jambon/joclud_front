@@ -9,10 +9,10 @@ export default function Helpers({ gameid, user, token }) {
 
     useEffect(() => {
         async function fetchGame() {
-            const response = await axios.post("https://leizour.fr/api/v1/games/getGame", { token, gameid })
+            const response = await axios.post("https://leizour.fr/api/v1/games/getHelpers", { token, gameid })
                 .catch((error) => console.error("Error getting game"));
-            setHelpers(JSON.parse(response.data.helpers));
-            setHelping(JSON.parse(response.data.helpers).includes(user.username));
+            setHelpers(response.data);
+            setHelping(response.data.includes(user.username));
             setGameLoading(false);
         }
 
