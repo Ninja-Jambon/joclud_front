@@ -6,6 +6,7 @@ import axios from "axios";
 import './Admin.css';
 
 import UserVerfication from '../assets/UserVerfication';
+import GameAdder from '../assets/GameAdder';
 
 export default function Admin() {
 	const navigate = useNavigate();
@@ -57,6 +58,7 @@ export default function Admin() {
                 <button className='button' onClick={() => {setSection(2)}}>Importation de jeux</button>
             </div>
             {section === 1 ? <UserVerfication token={token} /> : null}
+            {section === 2 ? <GameAdder token={token} /> : null}
 		</div>
     );
 }

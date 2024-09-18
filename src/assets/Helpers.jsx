@@ -12,7 +12,7 @@ export default function Helpers({ gameid, user, token }) {
             const response = await axios.post("https://leizour.fr/api/v1/games/getHelpers", { token, gameid })
                 .catch((error) => console.error("Error getting game"));
             setHelpers(response.data);
-            setHelping(response.data.includes(user.username));
+            setHelping(JSON.stringify(response.data).includes(user.id));
             setGameLoading(false);
         }
 
@@ -61,10 +61,10 @@ export default function Helpers({ gameid, user, token }) {
             <div>
                 <div className='helpers'>
                     {helpers.map((helper) => {
-                        if (helper === user.username) {
+                        if (helper.user_id === user.id) {
                             return <p className='helper' key={helper}><FontAwesomeIcon icon="fa-regular fa-face-smile" /> Vous</p>
                         } else {
-                            return <p className='helper' key={helper}><FontAwesomeIcon icon="fa-regular fa-face-smile" /> {helper}</p>
+                            return <p className='helper' key={helper.id}><FontAwesomeIcon icon="fa-regular fa-face-smile" /> {helper.name}</p>
                         }
                     })}
                     <button className={`helpButton ${helping ? "helpButton-enabled" : "helpButton-disabled"}`} 
